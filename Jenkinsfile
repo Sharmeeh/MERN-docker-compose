@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/your-user/your-docker-compose-repo.git'
+                git url: 'https://github.com/your-user/your-docker-compose-repo.git'
             }
         }
 
