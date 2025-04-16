@@ -1,23 +1,36 @@
 pipeline {
-    agent any
+  agent any
 
-    environment {
-        COMPOSE_PROJECT_NAME = "myapp"
+  environment {
+    COMPOSE_PROJECT_NAME = "mern_app"
+  }
+
+  stages {
+    stage('Checkout Code') {
+      steps {
+        // Replace with your Git repo URL
+        git url:'https://github.com/Sharmeeh/MERN-docker-compose.git'
+      }
     }
 
-    stages {
-        stage('Checkout Code') {
-            steps {
-                git url: 'https://github.com/your-user/your-docker-compose-repo.git'
-            }
-        }
-
-        stage('Build & Run with Docker Compose') {
-            steps {
-                sh 'docker-compose down' // Cleanup if needed
-                sh 'docker-compose up -d --build'
-            }
-        }
-
+    stage('Build & Start Containers') {
+      steps {
+        sh 'docker compose -f docker-compose.yml up -d --build'
+      }
     }
+
+    stage('Verify Backend is Running') {
+      steps {
+        sh 'docker compose ps'
+        sh 'docker compose logs backend'
+      }
+    }
+  }
+
+  post {
+    always {
+      echo "Pipeline completed. You can now access the frontend at http://172.26.96.12:5173"
+    }
+  }
 }
+          
