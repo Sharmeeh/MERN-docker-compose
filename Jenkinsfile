@@ -25,12 +25,13 @@ pipeline {
         sh 'docker-compose logs backend'
       }
     }
-  }
 
-  post {
-    always {
-      echo "Pipeline completed. You can now access the frontend at http://172.26.96.12:5173"
+    stage('Teardown') {
+      steps {
+        sh 'docker-compose down'
+      }
     }
   }
+  
 }
           
