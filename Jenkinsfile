@@ -9,7 +9,7 @@ pipeline {
     stage('Checkout Code') {
       steps {
         // Replace with your Git repo URL
-        git url:'https://github.com/Sharmeeh/MERN-docker-compose.git'
+        git url:'https://github.com/Sharmeeh/MERN-docker-compose.git' , branch: 'compose'
       }
     }
 
