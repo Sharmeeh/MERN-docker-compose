@@ -15,14 +15,14 @@ pipeline {
 
     stage('Build & Start Containers') {
       steps {
-        sh 'docker compose up'
+        sh 'docker-compose up'
       }
     }
 
     stage('Verify Backend is Running') {
       steps {
-        sh 'docker compose ps'
-        sh 'docker compose logs backend'
+        sh 'docker-compose ps'
+        sh 'docker-compose logs backend'
       }
     }
   }
